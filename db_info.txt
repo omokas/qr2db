@@ -1,0 +1,12 @@
+DB_NAME: hmu_db
+DB_USER: test
+DB_PASS: test
+DB_HOST: localhost 
+
+hmu-db tables: accounts, data 
+
+Test user has permittions ONLY for hmu_db tables for security purposes
+Any new account inserted to db must have encrypted password using php bcrypt function -> https://phppasswordhash.com/
+
+example 
+$2y$10$d4sFEBF3npd8UzLlwHDp0uEpUyPCrC.JoaBAbUp6y6lQ5M8cz8nLO = test_pass
