@@ -8,8 +8,8 @@ Therefore it enables you to use your smartphone, tablet or laptop with webcam to
 You do not need to install anything. Just visit the following link and use it:
 
 URL = http://orestis-iot.ddns.net:9000/id_scanner/ 
- username = **test**
- password = **test**
+<br/> username = **test**
+<br/> password = **test**
 <br/>
 >**Note: Camera Stream cannot open on non SSL domain - to bypass temporarily please set the following flag for this domain**
 
