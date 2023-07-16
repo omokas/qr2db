@@ -1,39 +1,53 @@
-# qr2mqtt
+# HMU ID Scanner - Web Client Implementation - Beta
 
-This project implements a HTML5 based QR code reader which sends all seen codes via MQTT to the specified topic. Therefore it enables you to use your smartphone, tablet or laptop with webcam to be used as cheap QR Scanner in the IoT environment.
+This project implements a HTML5 based QR code reader which sends all scanned codes via PHP to a database. 
+Therefore it enables you to use your smartphone, tablet or laptop with webcam to be used as cheap QR Scanner to pass QR data to a database.
 
-## Installing
+## Usage
 
 You do not need to install anything. Just visit the following link and use it:
 
-[Try the latest live demo](https://tinyurl.com/qr2mqtt)
+URL = http://orestis-iot.ddns.net:9000/id_scanner/ 
+ username = **test**
+ password = **test**
+<br/>
+>**Note: Camera Stream cannot open on non SSL domain - to bypass temporarily please set the following flag for this domain**
 
-*Note:* The application behind this link points to the most recent version of the application.
-It will improove / change in the future - so dont expect a stable version here.
+- **Step 1**: enter chrome flags using [chrome://flags](chrome://flags)
+- **Step 2**: search for "**unsafely-treat-insecure-origin-as-secure**"
+- **Step 3**: **enable** the flag
+- **Step 4**: enter into the field the domain name > http://orestis-iot.ddns.net:9000
 
-If you need a stable version then download the [source file](https://raw.githubusercontent.com/bytebang/qr2mqtt/master/scanner.html) to your device and open it from there. 
+*Example*: https://tinyurl.com/85x25wzm 
 
-## Using
+## Add account to DB
 
-The default parameters are pointing to a public broker with (more ore less) meaningful default values. However, you can set any of the GUI values using URL parameters. For example
-`https://rawgit.com/bytebang/qr2mqtt/master/scanner.html?host=something.noip.org&port=8080&tls=false&topic=house/1st_floor/signaling&lastWill=This is the end` will give you the latest version of the scanner which points to the broker `something.noip.org` at the port `8080` without TLS and `house/1st_floor/signaling` as the suggested topic. If the scanner is disconnected, then the last will `This is the end` will be published.
+In order to add an account to the database, you need to execute the following SQL query
 
-## Compatibility
+> **INSERT INTO accounts (id, username, password, email) 
+> VALUES ('1', 'username_here', 'password_here', 'email@domain.com')**
 
-I have tested the app with chrome on Android and Firefox & Chrome under Linux. It should work with other versions too.
-If you have any questions or wishes then please create an [issue](https://github.com/bytebang/qr2mqtt/issues) here in github.
+Passwords must be encrypted with **bcrypt** to be secure in case of SQL injection and database information exposure
 
+**Visit https://bcrypt-generator.com/ to generate your own password**
+
+## Current Compatibility
+
+Chrome - TESTED OK
 
 ## Credits
 
-It is entirely written in Javascript and utilizes the following components:
+It is written in Javascript and PHP and utilizes the following components:
 
+* QR2MQTT - bytebang - https://github.com/bytebang/qr2mqtt
 * GUI: [Bootstrap](https://getbootstrap.com/) and [jQuery](https://jquery.com/)
 * QR Code scan engine: [instascan](https://github.com/schmich/instascan)
-* MQTT Client library: [eclipse-paho](https://www.eclipse.org/paho/clients/js/)
-
+* Database: [MariaDB](https://mariadb.org/)
 
 ## License
 
-Copyright, 2018 [bytebang e.U.](http://www.bytebang.at)
+HMU Epictetus Team - 2023
 MIT License. See LICENSE for details.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
